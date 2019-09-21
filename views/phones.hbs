@@ -1,0 +1,18 @@
+{{>header }}
+<br />
+
+<div class="container">
+    <div class="row">
+        {{#each phoneModels }}
+        <div class="card col-4">
+            <img src="{{ imageurl }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ model }}</h5>
+                {{ brand }}
+                <p class="card-text"></p>
+                <a href="#" class="btn btn-primary">Select</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>

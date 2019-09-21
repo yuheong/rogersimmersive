@@ -1,0 +1,15 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+a {
+  color: rgb(255, 255, 255);
+}
+
+.centrebox {
+  margin-top: 250px;
+}
