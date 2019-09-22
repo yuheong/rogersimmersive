@@ -10,71 +10,13 @@
                 <h5 class="card-title">{{ model }}</h5>
                 {{ brand }}
                 <p class="card-text"></p>
-                <a href="{{ imageurl }}" class="btn btn-primary" model={{ model }}>Select</a>
-                <!--form method="GET">
+                <form action="phones/compare" method="POST">
                     <input id="model" type="hidden" name="model" value="{{ model }}" />
                     <input id="image" type="hidden" name="image" value="{{ imageurl }}" />
-                    <a class="btn btn-primary" onclick="this.parentNode.submit()">Select</a>
-                </form-->
+                    <a class="btn btn-primary" style="color: white" onclick="this.parentNode.submit()">Select</a>
+                </form>
             </div>
         </div>
         {{/each}}
     </div>
 </div>
-
-<script>
-    /**
-    * Prevent default click behaviour and update latest firebase branch
-    */
-    /*
-    $('form').click(function (event) {
-        event.preventDefault();
-        var urlParams = new URLSearchParams(location.search);
-        var model = urlParams.get('model');
-        var imageUrl = urlParams.get('image');
-
-        writeNewData('yes', model, imageUrl);
-    })*/
-    $('a').click(function (event) {
-        event.preventDefault();
-        var elem = $(this);
-        var imageUrl = elem.attr("href");
-        var model = elem.attr("model");
-        writeNewData('yes', model, imageUrl);
-    });
-
-    // PUT data in firebase db
-    function writeNewData(value, phone, imageurl) {
-
-        var positionRef = firebase.database().ref('pos/');
-        var currPosition;
-        positionRef.once('value').then(function (snapshot) {
-            if (snapshot.exists()) {
-                currPosition = snapshot.child("current").val();
-                currPosition = (currPosition === 0) ? 1 : 0;
-                console.log(currPosition);
-            } else {
-                console.log('current index not in db');
-            }
-        }).then(() => {
-            positionRef.set({
-                current: currPosition
-            })
-        }).catch(err => {
-            console.log('error :' + err);
-        });
-
-        var pushRef = firebase.database().ref('update/').push();
-        pushRef.set({
-            updated: value,
-            phone: phone,
-            imageurl: imageurl
-        }).then(() => {
-            //console.log('write success');
-        }).catch(err => {
-            console.log('error :' + err);
-        });
-    }
-
-    //console.log(updateRef);
-</script>

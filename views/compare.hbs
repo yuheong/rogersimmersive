@@ -1,0 +1,47 @@
+{{>header }}
+<br />
+
+<div class="container">
+    <div class="row">
+        {{#each phoneModels }}
+        <div class="card col-4">
+            <img id="img" src="{{ imageurl }}" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{ model }}</h5>
+                {{ brand }}
+                <p class="card-text"></p>
+                <a href="{{ imageurl }}" class="btn btn-primary" model={{ model }}>Select</a>
+            </div>
+        </div>
+        {{/each}}
+    </div>
+</div>
+
+<script>
+    /**
+    * Prevent default click behaviour and update latest firebase branch
+    */
+    $('a').click(function (event) {
+        event.preventDefault();
+        var elem = $(this);
+        var imageUrl = elem.attr("href");
+        var model = elem.attr("model");
+        writeNewData('yes', model, imageUrl);
+    });
+
+    // PUT data in firebase db
+    function writeNewData(value, phone, imageurl) {
+        var pushRef = firebase.database().ref('update/').push();
+        pushRef.set({
+            updated: value,
+            phone: phone,
+            imageurl: imageurl
+        }).then(() => {
+            //console.log('write success');
+        }).catch(err => {
+            console.log('error :' + err);
+        });
+    }
+
+    //console.log(updateRef);
+</script>
