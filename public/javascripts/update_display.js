@@ -20,11 +20,13 @@ updateRef.on('child_added', function (snapshot) {
         }).then(() => {
             loadPhone = true;
             document.getElementById("image0").setAttribute("src", imgUrl);
+            document.getElementById("name0").innerHTML = newPhone.phone
         }).catch(err => {
             console.log('error :' + err);
         });
     } else {
         document.getElementById("image1").setAttribute("src", imgUrl);
+        document.getElementById("name1").innerHTML = newPhone.phone
     }
 
 });

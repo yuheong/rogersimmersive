@@ -1,10 +1,11 @@
 {{>header }}
 <br />
-
+<h3>Choose a phone</h3>
 <div class="container">
     <div class="row">
         {{#each phoneModels }}
-        <div class="card col-4">
+        <div class="card col-4" tabindex="-1">
+            <input type="hidden" class="blue-input" />
             <img id="img" src="{{ imageurl }}" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">{{ model }}</h5>

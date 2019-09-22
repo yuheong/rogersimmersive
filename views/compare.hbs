@@ -1,6 +1,6 @@
 {{>header }}
 <br />
-
+<h3>Select another phone to compare</h3>
 <div class="container">
     <div class="row">
         {{#each phoneModels }}
@@ -10,11 +10,15 @@
                 <h5 class="card-title">{{ model }}</h5>
                 {{ brand }}
                 <p class="card-text"></p>
-                <a href="{{ imageurl }}" class="btn btn-primary" model={{ model }}>Select</a>
+                <a href="{{ imageurl }}" class="btn btn-primary" model="{{ model }}">Select</a>
             </div>
         </div>
         {{/each}}
     </div>
+    <br />
+    <form action="checkout" method="get">
+        <input class="btn btn-danger btn-large" type="submit" value="Next">
+    </form>
 </div>
 
 <script>
@@ -34,13 +38,19 @@
         var pushRef = firebase.database().ref('update/').push();
         pushRef.set({
             updated: value,
-            phone: phone,
+            phone: String(phone),
             imageurl: imageurl
         }).then(() => {
             //console.log('write success');
         }).catch(err => {
             console.log('error :' + err);
         });
+
+        var comparedPhoneRef = firebase.database().ref('anotherphone/');
+        comparedPhoneRef.set({
+            phone: String(phone),
+            imageurl: imageurl
+        })
     }
 
     //console.log(updateRef);
