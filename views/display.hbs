@@ -1,37 +1,23 @@
 <body>
-    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-app.js"></script>
-
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/6.6.1/firebase-database.js"></script>
-    <script>
-        var firebaseConfig = {
-            apiKey: "AIzaSyAmHla0ZEptvRMpxq6KhFiMgnDn05nccPk",
-            authDomain: "rogersimmerse.firebaseapp.com",
-            databaseURL: "https://rogersimmerse.firebaseio.com",
-            projectId: "rogersimmerse",
-            storageBucket: "",
-            messagingSenderId: "207917090458",
-            appId: "1:207917090458:web:0f6cf8b9f24068970b8123"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-    </script>
     <br />
     <script src="/javascripts/update_display.js"></script>
 
     <div class="container">
-        <div class="row">
-            <p id="change">hi</p>
+        <div class="row">            
+            <div class="card col-6">
+                <img id="image0" src="{{ imageurl }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">{{ model }}</h5>
+                    {{ brand }}
+                    <p class="card-text"></p>
+                </div>
+            </div>
             <div class="card col-6">
                 <img id="image1" src="{{ imageurl }}" class="card-img-top" alt="...">
                 <div class="card-body">
                     <h5 class="card-title">{{ model }}</h5>
                     {{ brand }}
                     <p class="card-text"></p>
-                    <a href="#" class="btn btn-primary">Select</a>
                 </div>
             </div>
         </div>

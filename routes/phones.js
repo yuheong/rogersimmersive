@@ -13,22 +13,10 @@ router.get('/', function(req, res, next) {
       phoneModels.push(element);
     }
     console.log(results);
-    writeNewData('yes');
     res.render('phones', { title: 'Rogers Immersive', phoneModels: phoneModels });
   });
 });
 
-// PUT data in firebase db
-function writeNewData(value) {
-  var newRef = firebase.database().ref('update/').push();
-  newRef.set({
-    updated: value,
-  }).then(() => {
-    //console.log('write success');
-  }).catch(err => {
-    console.log('error :' + err);
-  });
-  
-}
+
 
 module.exports = router;

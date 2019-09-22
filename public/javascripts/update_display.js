@@ -1,6 +1,24 @@
+// Listens for new key-value pairs added to update ref of firebase
 var updateRef = firebase.database().ref('update');
-updateRef.on('value', function (snapshot) {
-    console.log('res: ' + snapshot.val());
-    document.getElementById("image1").setAttribute("src", 'https://upload.wikimedia.org/wikipedia/commons/6/66/An_up-close_picture_of_a_curious_male_domestic_shorthair_tabby_cat.jpg');
-    document.getElementById("change").innerHTML = new Date();
+var positionRef = firebase.database().ref('pos/');
+
+updateRef.on('child_added', function (snapshot) {
+    var newPhone = snapshot.val();
+    var imgUrl = newPhone.imageurl;
+    var currPosition;
+    //console.log('children: ' + snapshot.numChildren());
+
+    positionRef.once('value').then(function (snapshot) {
+        if (snapshot.exists()) {
+            currPosition = snapshot.child("current").val();
+            console.log('index: ' + currPosition);
+        } else {
+            console.log('current index not in db');
+        }
+    }).then(() => {
+        var imgId = "image" + currPosition;
+        document.getElementById(imgId).setAttribute("src", imgUrl);
+    }).catch(err => {
+        console.log('error :' + err);
+    });
 });
