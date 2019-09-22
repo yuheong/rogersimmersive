@@ -4,18 +4,16 @@ const db = require('../database').database;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  console.log(new Date());
   let phoneModels = [];
-  db.query('SELECT * FROM phone_models', function (error, results, fields) {
-    if (error) throw error;
-    // connected!
-    console.log(results);
+  var query = db.query('SELECT * FROM phone_models').spread((results) => {
     for (let i = 0; i < results.length; i++) {
       const element = results[i];
       phoneModels.push(element);
     }
+    console.log(results);
+    res.render('phones', { title: 'Rogers Immersive', phoneModels: phoneModels });
   });
-  
-  res.render('phones', { title: 'Rogers Immersive', phoneModels: phoneModels });
 });
 
 module.exports = router;

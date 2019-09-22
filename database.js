@@ -1,17 +1,18 @@
-var mysql = require('mysql');
-var pool = mysql.createPool({
+var mysql = require('mysql-promise')();
+
+mysql.configure({
     connectionLimit: 10,
-    host: 'localhost',
-    user: 'root',
-    password: '*8Piglet',
-    database: 'rogers_immersive',
+    host: 'remotemysql.com',
+    user: 'CsERhmoU23',
+    password: 'fZ8BwUY7fj',
+    database: 'CsERhmoU23',
     insecureAuth : true
 });
-var abc = 123;
 
-pool.query('SELECT 1 + 1 AS solution', function (error, results, fields) {
-    if (error) throw error;
-    console.log('The solution is: ', results[0].solution);
-});
+mysql.query('SELECT 1 + 1 AS solution').then((results) => {
+    console.log('The solution is: ', results[0])
+    }).catch(error => {
+        throw error;
+    })
 
-module.exports = { database: pool };
+module.exports = { database: mysql };
